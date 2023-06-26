@@ -1,7 +1,7 @@
-﻿using GKrewBodegaWeb.Models;
+﻿using GKrewBodega.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GKrewBodegaWeb.Data
+namespace GKrewBodegaWeb.DataAccess
 {
     public class ApplicationDbContext : DbContext
     {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace GKrewBodegaWeb.Models
+namespace GKrewBodega.Models
 {
     public class Category
     {
@@ -10,7 +10,7 @@ namespace GKrewBodegaWeb.Models
         [Required]
         public string? Name { get; set; }
         [DisplayName("Display Order")]
-        [Range(1,100,ErrorMessage ="Display order must be between 1 and 100!!s")]
+        [Range(1, 100, ErrorMessage = "Display order must be between 1 and 100!!s")]
         public int DisplayOrder { get; set; }
         public DateTime CreatedDateTime { get; set; } = DateTime.Now;
     }

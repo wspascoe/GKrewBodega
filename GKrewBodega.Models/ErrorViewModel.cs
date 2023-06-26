@@ -1,4 +1,4 @@
-namespace GKrewBodegaWeb.Models
+namespace GKrewBodega.Models
 {
     public class ErrorViewModel
     {

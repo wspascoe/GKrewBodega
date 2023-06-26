@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GKrewBodegaWeb", "GKrewBodegaWeb\GKrewBodegaWeb.csproj", "{6C23863A-6B44-4947-A25F-5353561E18FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GKrewBodegaWeb", "GKrewBodegaWeb\GKrewBodegaWeb.csproj", "{6C23863A-6B44-4947-A25F-5353561E18FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GKrewBodega.DataAccess", "GKrewBodega.DataAccess\GKrewBodega.DataAccess.csproj", "{FB3B397B-64CC-42D5-A135-54339DC761D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GKrewBodega.Models", "GKrewBodega.Models\GKrewBodega.Models.csproj", "{8C994D98-32D4-4841-BF5C-E175945CCB70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GKrewBodega.Utility", "GKrewBodega.Utility\GKrewBodega.Utility.csproj", "{FD2FD727-BA56-44B2-B27C-305736D9F137}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{6C23863A-6B44-4947-A25F-5353561E18FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C23863A-6B44-4947-A25F-5353561E18FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C23863A-6B44-4947-A25F-5353561E18FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB3B397B-64CC-42D5-A135-54339DC761D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB3B397B-64CC-42D5-A135-54339DC761D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB3B397B-64CC-42D5-A135-54339DC761D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB3B397B-64CC-42D5-A135-54339DC761D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C994D98-32D4-4841-BF5C-E175945CCB70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C994D98-32D4-4841-BF5C-E175945CCB70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C994D98-32D4-4841-BF5C-E175945CCB70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C994D98-32D4-4841-BF5C-E175945CCB70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD2FD727-BA56-44B2-B27C-305736D9F137}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD2FD727-BA56-44B2-B27C-305736D9F137}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD2FD727-BA56-44B2-B27C-305736D9F137}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD2FD727-BA56-44B2-B27C-305736D9F137}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

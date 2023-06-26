@@ -1,5 +1,5 @@
-﻿using GKrewBodegaWeb.Data;
-using GKrewBodegaWeb.Models;
+﻿using GKrewBodega.Models;
+using GKrewBodegaWeb.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GKrewBodegaWeb.Controllers

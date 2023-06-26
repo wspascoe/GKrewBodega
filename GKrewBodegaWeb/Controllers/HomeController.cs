@@ -1,4 +1,4 @@
-﻿using GKrewBodegaWeb.Models;
+﻿using GKrewBodega.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
