@@ -13,11 +13,11 @@ namespace GKrewBodega.Models
         [Display(Name = "Stock Number")]
         public string StockNumber { get; set; }
         [Required]
-        [Range(1, 1000)]
+        [Range(0, 1000)]
         [Display(Name = "List Price")]
         public double ListPrice { get; set; }
         [Required]
-        [Range(1, 1000)]
+        [Range(0, 1000)]
         public double Price { get; set; }
         [ValidateNever]
         [Display(Name = "Image URL")]
