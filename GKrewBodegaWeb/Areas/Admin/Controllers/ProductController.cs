@@ -95,40 +95,6 @@ namespace GKrewBodegaWeb.Areas.Admin.Controllers
             return View(obj);
         }
 
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            var productFromDb = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id);
-
-            if (productFromDb == null)
-            {
-                return NotFound();
-            }
-
-            return View(productFromDb);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeletePost(int? id)
-        {
-            var productFromDb = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id);
-            if (productFromDb == null)
-            {
-                return NotFound();
-            }
-            _unitOfWork.Product.Remove(productFromDb);
-            _unitOfWork.Save();
-            TempData["success"] = "Product deleted successfully";
-            return RedirectToAction("Index");
-
-
-        }
-
         #region API Calls
 
         [HttpGet]
@@ -139,35 +105,28 @@ namespace GKrewBodegaWeb.Areas.Admin.Controllers
         }
 
 
-        //[HttpDelete]
-        //public IActionResult Delete(int? id)
-        //{
-        //    var productToBeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
-        //    if (productToBeDeleted == null)
-        //    {
-        //        return Json(new { success = false, message = "Error while deleting" });
-        //    }
+        [HttpDelete]
+        public IActionResult Delete(int? id)
+        {
+            var obj = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id);
 
-        //    string productPath = @"images\products\product-" + id;
-        //    string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, productPath);
+            if (obj == null)
+            {
+                return Json(new { success = false, message = "Error while deleting" });
+            }
 
-        //    if (Directory.Exists(finalPath))
-        //    {
-        //        string[] filePaths = Directory.GetFiles(finalPath);
-        //        foreach (string filePath in filePaths)
-        //        {
-        //            System.IO.File.Delete(filePath);
-        //        }
+            var oldImagePath = Path.Combine(_hostEnvironment.WebRootPath, obj.ImageUrl.TrimStart('\\'));
 
-        //        Directory.Delete(finalPath);
-        //    }
+            if (System.IO.File.Exists(oldImagePath))
+            {
+                System.IO.File.Delete(oldImagePath);
+            }
 
+            _unitOfWork.Product.Remove(obj);
+            _unitOfWork.Save();
 
-        //    _unitOfWork.Product.Remove(productToBeDeleted);
-        //    _unitOfWork.Save();
-
-        //    return Json(new { success = true, message = "Delete Successful" });
-        //}
+            return Json(new { success = true, message = "Delete Successful" });
+        }
         #endregion
     }
 }

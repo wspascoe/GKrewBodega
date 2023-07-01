@@ -42,8 +42,29 @@ function Delete(url) {
                 url: url,
                 type: 'DELETE',
                 success: function (data) {
-                    dataTable.ajax.reload();
-                    toastr.success(data.message);
+                    if (data.success) {
+                        dataTable.ajax.reload();
+                        //Swal.fire({
+                        //    position: 'top-end',
+                        //    icon: 'success',
+                        //    title: data.message,
+                        //    width: 400,
+                        //    showConfirmButton: false,
+                        //    timer: 1500
+                        //})
+                        /*toastr.success(data.message);*/
+                    }
+                    else {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: data.message,
+                            width: 400,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                       /* toastr.error(data.message);*/
+                    }
                 }
             })
         }

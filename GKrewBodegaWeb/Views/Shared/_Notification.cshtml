@@ -2,8 +2,17 @@
 {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
-        toastr.success('@TempData["success"]')
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: '@TempData["success"]',
+            width: 400,
+            showConfirmButton: false,
+            timer: 1500
+        })
+        @*toastr.success('@TempData["success"]')*@
     </script>
 }
 
@@ -11,7 +20,16 @@
 {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
-        toastr.error('@TempData["error"]')
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: '@TempData["error"]',
+                width: 400,
+                showConfirmButton: false,
+                timer: 1500
+            })
+        @*toastr.error('@TempData["error"]')*@
     </script>
 }
