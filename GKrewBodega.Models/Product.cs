@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GKrewBodega.Models
 {
@@ -15,16 +10,20 @@ namespace GKrewBodega.Models
         public string Name { get; set; }
         public string Description { get; set; }
         [Required]
+        [Display(Name = "Stock Number")]
         public string StockNumber { get; set; }
         [Required]
-        [Range(1,1000)]
+        [Range(1, 1000)]
+        [Display(Name = "List Price")]
         public double ListPrice { get; set; }
         [Required]
         [Range(1, 1000)]
         public double Price { get; set; }
         [ValidateNever]
+        [Display(Name = "Image URL")]
         public string ImageUrl { get; set; }
         [Required]
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
         [ValidateNever]
         public Category Category { get; set; }

@@ -1,6 +1,7 @@
 ﻿using GKrewBodega.DataAccess.Repository.IRepository;
 using GKrewBodega.Models;
 using GKrewBodega.Models.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Drawing;
@@ -21,9 +22,7 @@ namespace GKrewBodegaWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> objProductList = _unitOfWork.Product.GetAll();
-
-            return View(objProductList);
+            return View();
         }
 
         public IActionResult Upsert(int? id)
@@ -44,9 +43,9 @@ namespace GKrewBodegaWeb.Areas.Admin.Controllers
             else
             {
                 //Update
+                productVM.Product = _unitOfWork.Product.GetFirstOrDefault(i => i.Id == id);
+                return View(productVM);
             }
-
-            return View(productVM);
         }
 
         [HttpPost]
@@ -63,6 +62,16 @@ namespace GKrewBodegaWeb.Areas.Admin.Controllers
                     var uploads = Path.Combine(wwwRootPath, @"images\products");
                     var extension = Path.GetExtension(file.FileName);
 
+                    if(obj.Product.ImageUrl != null)
+                    {
+                        var oldImagePath = Path.Combine(wwwRootPath, obj.Product.ImageUrl.TrimStart('\\'));
+
+                        if(System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
                     using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension),FileMode.Create))
                     {
                         file.CopyTo(fileStreams);
@@ -70,8 +79,15 @@ namespace GKrewBodegaWeb.Areas.Admin.Controllers
                     obj.Product.ImageUrl = @"\images\products\" + fileName + extension;
 
                 }
+                if(obj.Product.Id == 0)
+                {
+                    _unitOfWork.Product.Add(obj.Product);
 
-                _unitOfWork.Product.Add(obj.Product);
+                }
+                else
+                {
+                    _unitOfWork.Product.Update(obj.Product);
+                }
                 _unitOfWork.Save();
                 TempData["success"] = "Product created successfully";
                 return RedirectToAction("Index");
@@ -112,5 +128,46 @@ namespace GKrewBodegaWeb.Areas.Admin.Controllers
 
 
         }
+
+        #region API Calls
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category");
+            return Json(new { data = objProductList });
+        }
+
+
+        //[HttpDelete]
+        //public IActionResult Delete(int? id)
+        //{
+        //    var productToBeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
+        //    if (productToBeDeleted == null)
+        //    {
+        //        return Json(new { success = false, message = "Error while deleting" });
+        //    }
+
+        //    string productPath = @"images\products\product-" + id;
+        //    string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, productPath);
+
+        //    if (Directory.Exists(finalPath))
+        //    {
+        //        string[] filePaths = Directory.GetFiles(finalPath);
+        //        foreach (string filePath in filePaths)
+        //        {
+        //            System.IO.File.Delete(filePath);
+        //        }
+
+        //        Directory.Delete(finalPath);
+        //    }
+
+
+        //    _unitOfWork.Product.Remove(productToBeDeleted);
+        //    _unitOfWork.Save();
+
+        //    return Json(new { success = true, message = "Delete Successful" });
+        //}
+        #endregion
     }
 }
