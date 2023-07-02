@@ -24,15 +24,36 @@ namespace GKrewBodegaWeb.Areas.Customer.Controllers
             return View(productList);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(int productId)
         {
             ShoppingCart cart = new()
             {
                 Count = 1,
-                Product = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id, includeProperties: "Category")
+                ProductId = productId,
+                Product = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == productId, includeProperties: "Category")
 
              };
             return View(cart);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Details(ShoppingCart shoppingCart)
+        {
+            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.GetFirstOrDefault(u => u.ProductId == shoppingCart.ProductId);
+
+            if(cartFromDb == null)
+            {
+                _unitOfWork.ShoppingCart.Add(shoppingCart);
+            }
+            else
+            {
+                _unitOfWork.ShoppingCart.IncrementCount(cartFromDb, shoppingCart.Count);
+            }
+
+            _unitOfWork.Save();
+
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()
